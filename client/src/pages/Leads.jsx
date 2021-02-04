@@ -1,26 +1,26 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useRequest } from '../hooks/request.hook';
+import { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLeads } from '../actions/leads';
 import Layout from './layout/Layout';
 
+const getLeads = ({ leads: { leads } }) => leads;
+
 const Leads = () => {
-    const [leads, setLeads] = useState([]),
-        { request } = useRequest();
+    const dispatch = useDispatch(),
+        leads = useSelector(getLeads);
 
-    const getLeads = useCallback(async () => {
-
-        const { res } = await request('/api/leads');
-
-        res && setLeads(res.leads);
-    }, [request, leads, setLeads]);
+    const loadLeads = useCallback(async () => {
+        await dispatch(fetchLeads());
+    }, []);
 
     useEffect(() => {
-        getLeads();
+        loadLeads();
     }, [])
 
     return <Layout>
         <h3>Лиды</h3>
         <div>
-            {leads.map(({ id, name, phone }) => {
+            {leads?.map(({ id, name, phone }) => {
                 return <div key={id}>
                     <div>{id} - {name}</div>
                     <div>{phone}</div>

@@ -18,7 +18,10 @@ const Header = () => {
                 <NavLink to='/leads'>Лиды</NavLink>
             </div>
             <div className={s.actions}>
-                {isAuthenticated && <div className={s.logout} onClick={logout}>Выйти</div>}
+                {isAuthenticated
+                    ? <div className={s.logout} onClick={logout}>Выйти</div>
+                    : <div />
+                }
             </div>
         </div>
     </div>;
