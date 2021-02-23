@@ -11,7 +11,7 @@ function App() {
         <UserContext.Provider value={{
             token, login, logout, userId, isAuthenticated
         }}>
-            <Pages isAuthenticated={isAuthenticated} />
+            <Pages isAuthenticated={true} />
         </UserContext.Provider>
     </BrowserRouter>;
 }

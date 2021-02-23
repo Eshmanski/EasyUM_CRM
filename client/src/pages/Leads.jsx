@@ -10,20 +10,27 @@ const Leads = () => {
 
         const { res } = await request('/api/leads');
 
-        res && setLeads(res.leads);
+        res && setLeads(res);
     }, [request, leads, setLeads]);
+
+    const handleRemove = async id => {
+        const { res } = await request(`/api/leads/${id}`, 'DELETE');
+
+        res && setLeads(res);
+    }
 
     useEffect(() => {
         getLeads();
-    }, [])
+    }, []);
 
     return <Layout>
         <h3>Лиды</h3>
         <div>
-            {leads?.map(({ id, name, phone }) => {
+            {leads?.map(({ _id: id, name, phone }) => {
                 return <div key={id}>
-                    <div>{id} - {name}</div>
+                    <div>{name}</div>
                     <div>{phone}</div>
+                    <div onClick={() => handleRemove(id)}>Удалить</div>
                     <br />
                 </div>
             })}
