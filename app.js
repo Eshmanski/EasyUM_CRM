@@ -1,25 +1,25 @@
 const express = require('express');
-const config = require('config');
-const mongoose = require('mongoose');
-
+const { connect } = require('mongoose');
+const router = require('./routes/api.routes');
 const app = express();
 
-app.use(express.json({ extended: true }));
+const PORT = process.env.PORT || 5000;
 
-const PORT = process.env.PORT || config.get('port');
+app.use(express.json({ extended: true }))
+app.use('/api', router);
 
 async function start() {
     try {
-        await mongoose.connect(config.get('mongoUri'), {
+        await connect('mongodb+srv://root:f7QOms6zJfhlwhE9@cluster0.mvgul.mongodb.net/mern?retryWrites=true&w=majority', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
-        })
+        });
 
         app.listen(PORT, () => console.log(`Server has been started on port ${PORT}`));
+
     } catch (e) {
-        console.log('Server Error', e.message)
-        process.exit(1)
+        console.log('Server error', e.message);
     }
 }
 
