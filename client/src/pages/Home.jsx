@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useRequest} from '../hooks/request.hook';
-import Layout from './layout/Layout';
+import Layout from '../components/layout/Layout';
 import Button from '../ui-components/button/Button';
 import Input from '../ui-components/input/Input';
 

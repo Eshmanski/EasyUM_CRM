@@ -1,7 +1,10 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useRequest } from '../hooks/request.hook';
+import { statuses } from '../../constants';
+import { useRequest } from '../../hooks/request.hook';
 import { useHistory } from 'react-router-dom';
-import Layout from './layout/Layout';
+import Layout from '../layout/Layout';
+import s from './leads.module.css';
+
 
 const Leads = () => {
     const [leads, setLeads] = useState([]),
@@ -31,15 +34,22 @@ const Leads = () => {
 
     return <Layout>
         <h3>Лиды</h3>
-        <div>
-            {leads?.map(({ _id: id, name, phone }) => {
-                return <div key={id} onClick={() => handleOpenLead(id)}>
-                    <div>{name}</div>
-                    <div>{phone}</div>
-                    <div onClick={() => handleRemove(id)}>Удалить</div>
-                    <br />
+        <div className={s.board}>
+            {statuses.map(({ value, title }) => <div className={s.list} key={value}>
+                <div className={s.title}>
+                    {title}
                 </div>
-            })}
+
+                {leads?.filter(({ status }) => status === value).map(({ _id: id, name, phone }) => {
+                    return <div key={id} className={s.card} onClick={() => handleOpenLead(id)}>
+                        <div>{name}</div>
+                        <div>{phone}</div>
+                        <div className={s.remove} onClick={() => handleRemove(id)}>Удалить</div>
+                    </div>
+                })}
+                </div>
+            )}
+
         </div>
     </Layout>;
 };

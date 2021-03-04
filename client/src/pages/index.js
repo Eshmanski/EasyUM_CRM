@@ -1,8 +1,9 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Auth from './auth/Auth';
-import Register from './auth/Register';
-import Leads from './Leads';
-import Lead from './Lead';
+import Auth from '../components/auth/Auth';
+import Register from '../components/auth/Register';
+import Leads from '../components/leads/Leads';
+import Lead from '../components/leads/Lead';
+import LeadEdit from '../components/leads/LeadEdit';
 import Home from './Home';
 
 const Pages = ({ isAuthenticated }) => {
@@ -10,6 +11,10 @@ const Pages = ({ isAuthenticated }) => {
         return <Switch>
             <Route path='/' exact>
                 <Home />
+            </Route>
+
+            <Route path='/leads/:id/edit' exact>
+                <LeadEdit />
             </Route>
 
             <Route path='/leads/:id' exact>

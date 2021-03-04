@@ -25,7 +25,7 @@ const Register = () => {
     // }, [form]);
 
     const handleSubmitForm = useCallback(async () => {
-        const { res, err } = await request('/api/auth/register', 'POST', {...form});
+        const { res, err } = await request('/api/auth/registration', 'POST', {...form});
 
         console.log(res, err);
     }, [form]);

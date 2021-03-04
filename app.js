@@ -1,12 +1,14 @@
 const express = require('express');
 const { connect } = require('mongoose');
 const router = require('./routes/api.routes');
+const routerAuth = require('./routes/api-auth.routes');
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json({ extended: true }))
 app.use('/api', router);
+app.use('/api/auth', routerAuth);
 
 async function start() {
     try {
