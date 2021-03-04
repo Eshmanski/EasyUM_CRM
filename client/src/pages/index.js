@@ -4,14 +4,14 @@ import Register from '../components/auth/Register';
 import Leads from '../components/leads/Leads';
 import Lead from '../components/leads/Lead';
 import LeadEdit from '../components/leads/LeadEdit';
+import Deals from '../components/deals/Deals';
+import Deal from '../components/deals/Deal';
+import DealEdit from '../components/deals/DealEdit';
 import Home from './Home';
 
 const Pages = ({ isAuthenticated }) => {
     if (isAuthenticated) {
         return <Switch>
-            <Route path='/' exact>
-                <Home />
-            </Route>
 
             <Route path='/leads/:id/edit' exact>
                 <LeadEdit />
@@ -23,6 +23,22 @@ const Pages = ({ isAuthenticated }) => {
 
             <Route path='/leads' exact>
                 <Leads />
+            </Route>
+
+            <Route path='/deals/:id/edit' exact>
+                <DealEdit />
+            </Route>
+
+            <Route path='/deals/:id' exact>
+                <Deal />
+            </Route>
+
+            <Route path='/deals' exact>
+                <Deals />
+            </Route>
+
+            <Route path='/' exact>
+                <Home />
             </Route>
 
             <Redirect to='/' />

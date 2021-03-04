@@ -5,9 +5,9 @@ import Input from '../../ui-components/input/Input';
 import Button from '../../ui-components/button/Button';
 import Layout from '../layout/Layout';
 import T from '../../ui-components/text/T';
-import s from './leads.module.css';
+import s from './deals.module.css';
 
-const LeadEdit = () => {
+const DealEdit = () => {
     const { request } = useRequest(),
         { id } = useParams(),
         history = useHistory();
@@ -23,21 +23,21 @@ const LeadEdit = () => {
     }, [fields]);
 
     const getLead = useCallback(async () => {
-        const { res } = await request(`/api/leads/${id}`);
+        const { res } = await request(`/api/deals/${id}`);
 
         res && update(res);
     }, []);
 
     const handleRemove = useCallback(async () => {
-        const { res } = await request(`/api/leads/${id}`, 'DELETE');
+        const { res } = await request(`/api/deals/${id}`, 'DELETE');
 
-        res && history.push('/leads/');
+        res && history.push('/deals/');
     }, [id]);
 
     const handleSubmit = useCallback(async () => {
-        const { res } = await request(`/api/leads/${id}`, 'PUT', fields);
+        const { res } = await request(`/api/deals/${id}`, 'PUT', fields);
 
-        res && history.push(`/leads/${id}`);
+        res && history.push(`/deals/${id}`);
     }, [id, fields]);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const LeadEdit = () => {
     }, []);
 
     return <Layout>
-        <h3>Редактирование Лида</h3>
+        <h3>Редактирование Сделки</h3>
 
         <div className={s.lead}>
             <div className={s.field}>
@@ -103,4 +103,4 @@ const LeadEdit = () => {
     </Layout>;
 };
 
-export default LeadEdit;
+export default DealEdit;

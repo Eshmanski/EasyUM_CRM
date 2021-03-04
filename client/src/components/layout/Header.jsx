@@ -17,6 +17,10 @@ const Header = () => {
             <div className={s.item}>
                 <NavLink to='/leads'>Лиды</NavLink>
             </div>
+
+            <div className={s.item}>
+                <NavLink to='/deals'>Сделки</NavLink>
+            </div>
             <div className={s.actions}>
                 {isAuthenticated && <div className={s.logout} onClick={logout}>Выйти</div>}
             </div>
