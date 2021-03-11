@@ -1,5 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useContext } from 'react';
 import { useRequest } from '../../hooks/request.hook';
+import { UserContext } from '../../context/UserContext';
 import { useHistory, useParams } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import Button from '../../ui-components/button/Button';
@@ -11,7 +12,9 @@ const Lead = () => {
         { name, phone, status, createdAt, _id } = lead,
         { request } = useRequest(),
         { id } = useParams(),
-        history = useHistory();
+        history = useHistory(),
+        { userId } = useContext(UserContext);
+
 
     const getLead = useCallback(async () => {
         const { res } = await request(`/api/leads/${id}`);
@@ -28,7 +31,7 @@ const Lead = () => {
     const handleEdit = useCallback (() => history.push(`/leads/${id}/edit`), [id]);
 
     const handleCreateDeal = useCallback(async () => {
-        const payload = { name, phone, lead: _id };
+        const payload = { name, phone, lead: _id, author: userId, responsible: userId };
 
         const { res } = await request('/api/deals/create', 'POST', payload);
 

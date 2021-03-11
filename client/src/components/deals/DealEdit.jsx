@@ -95,7 +95,7 @@ const DealEdit = () => {
             <div className={s.field}>Дата создания: {fields.createdAt}</div>
 
             <div className={s.field}>
-                <div className={s.remove} onClick={handleRemove}>Удалить</div>
+                <div lassName={s.link} onClick={handleRemove}>Удалить</div>
             </div>
 
             <Button onClick={handleSubmit}>Сохранить</Button>
