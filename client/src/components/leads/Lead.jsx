@@ -16,6 +16,7 @@ const Lead = () => {
         { userId } = useContext(UserContext);
 
 
+
     const getLead = useCallback(async () => {
         const { res } = await request(`/api/leads/${id}`);
 
@@ -40,6 +41,8 @@ const Lead = () => {
 
     useEffect(() => {
         getLead();
+        console.log(userId);
+
     }, []);
 
     return <Layout>

@@ -19,7 +19,7 @@ const Deal = () => {
             request(`/api/deals/${id}/transaction`)
         ]);
 
-        log && setLog(log);
+        log && setLog(log.reverse());
         res && update(res);
     }, [request, deal]);
 
@@ -55,12 +55,6 @@ const Deal = () => {
 
 
             {lead && <div className={s.box}>
-                <div className={s.subtitle}>Созано на основе лида</div>
-                <div>Имя: {lead.name}</div>
-                <div>Телефон: {lead.phone}</div>
-                <div>Статус: <T id={lead.status && `lead.${lead.status}`} /></div>
-                <div>Дата создания: {lead.createdAt}</div>
-
                 <div className={s.link} onClick={handleOpenLead}>Открыть лид</div>
             </div> }
 
@@ -80,6 +74,28 @@ const Deal = () => {
                         </div>
                         <div>
                             Автор: {authorId}
+                        </div>
+                    </div>}
+
+                    {changed.type === 'edit' && <div className={s.row}>
+                        <div>
+                            id: {id}
+                        </div>
+                        <div>
+                            Заявка изменена
+                        </div>
+                        <div>
+                            Автор: {authorId}
+                        </div>
+                        <div>
+                            <b>Измененные поля:</b>
+                        </div>
+                        <div>
+                            {changed.fields?.map(({ after, before, field }, i) =>  <div key={i}>
+                                <div>Поле {field}</div>
+                                <div>До {before}</div>
+                                <div>После {after}</div><br/>
+                            </div>)}
                         </div>
                     </div>}
 

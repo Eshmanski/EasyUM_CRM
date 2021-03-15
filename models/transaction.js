@@ -1,19 +1,28 @@
 const { Schema, model } = require('mongoose');
 
-const DealSchema = new Schema ({
+const TransactionSchema = new Schema ({
     name: String,
-    phone: {
-        type: String,
-        required: true
-    },
-    status: {
-        type: String,
-        enum: ['to_do', 'in_progress', 'done'],
-        default: 'to_do'
-    },
-    lead: {
+    objectId: {
         type: Schema.Types.ObjectId,
-        ref: 'Lead'
+        ref: 'Deal'
+    },
+    changed: {
+        type: {
+            type: String,
+            enum: ['create', 'edit', 'delete'],
+            default: 'create'
+        },
+        fields: [
+            {
+                field: String,
+                before: Schema.Types.Mixed,
+                after: Schema.Types.Mixed
+            }
+        ]
+    },
+    authorId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     createdAt: {
         type: Date,
@@ -21,4 +30,4 @@ const DealSchema = new Schema ({
     }
 });
 
-module.exports = model('Deal', DealSchema);
+module.exports = model('Transaction', TransactionSchema);

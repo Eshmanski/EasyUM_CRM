@@ -44,7 +44,6 @@ const Leads = () => {
                     return <div key={id} className={s.card} onClick={() => handleOpenLead(id)}>
                         <div>{name}</div>
                         <div>{phone}</div>
-                        <div className={s.remove} onClick={() => handleRemove(id)}>Удалить</div>
                     </div>
                 })}
                 </div>

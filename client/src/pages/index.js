@@ -8,6 +8,7 @@ import Deals from '../components/deals/Deals';
 import Deal from '../components/deals/Deal';
 import DealEdit from '../components/deals/DealEdit';
 import Home from './Home';
+import History from '../components/history/History';
 
 const Pages = ({ isAuthenticated }) => {
     if (isAuthenticated) {
@@ -35,6 +36,10 @@ const Pages = ({ isAuthenticated }) => {
 
             <Route path='/deals' exact>
                 <Deals />
+            </Route>
+
+            <Route path='/history' exact>
+                <History />
             </Route>
 
             <Route path='/' exact>
